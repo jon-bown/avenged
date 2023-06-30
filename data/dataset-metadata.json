@@ -1,40 +1,116 @@
 {
-    "title": "Dataset title", 
-    "subtitle": "Dataset subtitle",
-    "description": "use data_card.md",
-    "id": "username/dataset-title", 
-    "licenses": [{"name": "CC0-1.0"}],
+    "title": "Avenged Sevenfold Songs",
+    "id": "jonbown/avenged-sevenfold-songs",
+    "description": "-----------------------------------------------------------------------------------------------------------\n\n# Avenged Sevenfold Songs From Spotify\n\n## Popularity and Song Features\n\n\n-----------------------------------------------------------------------------------------------------------\nBy Spotify API\n\n&gt;Detailed song info for every Avenged Sevenfold song released/available on spotify. Duplicate songs may be included to the presence of compilation albums.\n\n-----------------------------------------------------------------------------------------------------------\n## Included Files\n\n&gt; \n- avenged_songs.csv: Detailed information on each song by Avenged Sevenfold including song features, popularity, release date, etc.\n\n## Featured Notebooks & How To Use\n&gt; \n\n## Pipeline\n\n&gt;If you're interested in how this dataset is maintained and updated, please see this [GitHub Repo](https://github.com/jon-bown/avenged)\n\n## Acknowledgements\n\n&gt; If you use this dataset in your research, please credit Spotify.\n",
+    "licenses": [{"name": "CC-BY-NC-SA-4.0"}],
     "resources": [
-      {
-        "path": "my-data.csv",
-        "description": "This is my data!",
-        "schema": {
-          "fields": [
-            {
-              "name": "StringField",
-              "description": "String field description",
-              "type": "string"
-            },
-            {
-              "name": "NumberField",
-              "description": "Number field description",
-              "type": "number"
-            },
-            {
-              "name": "DateTimeField",
-              "description": "Date time field description",
-              "type": "datetime"
+        {
+            "path": "avenged_songs.csv",
+            "description": "Avenged Sevenfold song attributes from Spotify",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "spotify_id",
+                        "description": "Spotify Song ID",
+                        "type": "string"
+                    },
+                    {
+                        "name": "spotify_uri",
+                        "description": "Spotify Song uri",
+                        "type": "string"
+                    },
+                    {
+                        "name": "album",
+                        "description": "Album Name",
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "description": "Song name",
+                        "type": "string"
+                    },
+                    {
+                        "name": "popularity",
+                        "description": "Spotify popularity score",
+                        "type": "number"
+                    },
+                    {
+                        "name": "release_date",
+                        "description": "Album release date",
+                        "type": "datetime"
+                    },
+                    {
+                        "name": "track_number",
+                        "description": "Song order on album",
+                        "type": "number"
+                    },
+                    {
+                        "name": "danceability",
+                        "description": "Spotify danceability score",
+                        "type": "number"
+                    },
+                    {
+                        "name": "energy",
+                        "description": "Spotify energy score",
+                        "type": "number"
+                    },
+                    {
+                        "name": "key",
+                        "description": "Song key",
+                        "type": "number"
+                    },
+                    {
+                        "name": "loudness",
+                        "description": "Spotify loudness score",
+                        "type": "number"
+                    },
+                    {
+                        "name": "mode",
+                        "description": "Spotify mode",
+                        "type": "number"
+                    },
+                    {
+                        "name": "speechiness",
+                        "description": "Spotify speechiness score",
+                        "type": "number"
+                    },
+                    {
+                        "name": "acousticness",
+                        "description": "Spotify acousticness score",
+                        "type": "number"
+                    },
+                    {
+                        "name": "instrumentalness",
+                        "description": "Spotify instrumentalness score",
+                        "type": "number"
+                    },
+                    {
+                        "name": "liveness",
+                        "description": "Spotify liveness score",
+                        "type": "number"
+                    },
+                    {
+                        "name": "valence",
+                        "description": "Spotify valence score",
+                        "type": "number"
+                    },
+                    {
+                        "name": "tempo",
+                        "description": "Song tempo",
+                        "type": "number"
+                    },
+                    {
+                        "name": "duration_ms",
+                        "description": "Duration in milliseconds",
+                        "type": "number"
+                    },
+                    {
+                        "name": "time_signature",
+                        "description": "Song time signature",
+                        "type": "number"
+                    }
+                ]
             }
-          ]
         }
-      },
-      {
-        "path": "my-extra-data.txt",
-        "description": "This is my extra file!"
-      }
-    ],
-    "keywords": [
-      "beginner",
-      "tutorial"
     ]
-  }
+}

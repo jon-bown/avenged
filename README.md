@@ -1,49 +1,103 @@
-# Kaggle Data Pipeline Template
+# Avenged Sevenfold Songs Dataset
 
-Welcome to the Kaggle Data Pipeline Template! This repository serves as a blueprint for creating automated data pipelines using the Kaggle API. It includes the necessary scripts and file structure to get your own data pipeline up and running quickly.
+The purpose of this repository is to maintain Avenged Sevenfold datasets and notebooks on Kaggle.
 
-## Prerequisites
+The `data` folder contains an up-to-date compliation of Avenged Sevenfold songs from the Spotify API. A scheduled workflow runs on the 1st of every month to check for updates. If updates are made, Kaggle is updated via the Kaggle API. The 'popularity' feature is really the only column that will change over time unless new songs are added.
 
-You will need:
+## Table of Contents
+1. [Project Structure](#project-structure)
+2. [Getting Started](#getting-started)
+3. [Automation with GitHub Actions](#automation-with-github-actions)
+4. [Licenses](#licenses)
+5. [Disclaimer](#disclaimer)
+6. [Acknowledgements](#acknowledgements)
 
-- A Kaggle account.
-- API credentials from Kaggle.
+## Project Structure
 
-## Set Up
+- 📂 `data`: This folder contains the dataset and metadata required for the Kaggle upload. The dataset comprises attributes of Avenged Sevenfold songs, and the metadata file provides information about the dataset and the data fields.
 
-To use this repository as a template, follow these steps:
+- 📂 `utils`: This folder contains helper functions that are used in the generator script. These functions facilitate data processing and interactions with APIs.
 
-1. Click on the `Use this template` button to create a new repository.
-2. Clone the new repository to your local machine.
-3. Install the Kaggle API by running `pip install kaggle`.
+- 📜 `met_spotify_generator.py`: This is the main script that generates the dataset. It utilizes the helper functions in the `utils` folder, interacts with the Spotify API to fetch song attributes, and compiles the data into the format stored in the `song-data` folder.
 
-## Kaggle API Credentials
+- 📓 `avenged_spotify_data.ipynb`: This Jupyter notebook allows for testing and visualization of the code used in the generator script. It provides a step-by-step execution of the code blocks for better understanding and debugging.
 
-To use the Kaggle API, you will need to add your API credentials as secrets to your repository. To do this, follow these steps:
+- 📜 `README.md`: The file you are currently viewing, provides an overview of the project.
 
-1. Download your Kaggle API credentials file (`kaggle.json`) from the Account section of your Kaggle profile.
-2. Navigate to the 'Settings' tab of your new repository.
-3. Click on 'Secrets'.
-4. Click on 'New repository secret'.
-5. Name the new secret `KAGGLE_USERNAME` and set its value to your Kaggle username (found in the `kaggle.json` file).
-6. Create another secret named `KAGGLE_KEY` and set its value to the corresponding key from the `kaggle.json` file.
+## Getting Started
 
-By doing this, you ensure that your Kaggle credentials are kept secure and are not shared publicly.
+Before diving into the project, there are several prerequisites that need to be fulfilled:
 
-## Usage
+### 1. Spotify Account and API Credentials
 
-Once you have set up your Kaggle API credentials, you can start using the data pipeline. 
+This project fetches data from the Spotify Web API. Hence, you will need to have a Spotify account and register an application to get the necessary API credentials (Client ID and Client Secret). 
 
-- `data` folder: Whatever datasets you generate should be placed within the data folder and should be referenced directly by the dataset-metadata.json file. For more info on structuring the metadata file, see the [Metadata Wiki](https://github.com/Kaggle/kaggle-api/wiki/Dataset-Metadata). The data_card.md can be updated to be included in your metadata file `description` key.
-- `utils` folder: Convenient place to put helper functions for your pipeline. There is an example for updating the data card in the metadata file. 
-- `tests` folder: Contains basic tests from Evidently to monitor data integrity before pushing to Kaggle. Docs available [here](https://docs.evidentlyai.com)
-- `requirements.txt`: Add names of all python packages used. Lock versions if applicable.
-- `generator.py`: Build your data generator. Basic code is included to update a kaggle data version.
-- `actions` folder: Contains an example of a github action that will run the `generator.py` script on the first day of every month. This template will not do anything by itself, it must be developed within a github action by navigating to the 'Actions' tab and creating a new workflow.
+1. Visit the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/login) and log in with your Spotify account. 
+2. Create a new application and obtain your Client ID and Client Secret.
 
-## Contact
+The credentials are stored in a `config.py` file which is not included in the repository due to privacy concerns. This file should be created locally in your project directory. The file should contain:
 
-For any questions or concerns, please open an issue on this repository.
+```python
+spotify_credentials = {
+    "CLIENT_ID": "your_spotify_client_id",
+    "CLIENT_SECRET": "your_spotify_client_secret"
+}
+```
 
----
-© 2023 `jon-bown`
+The `config.py` file is used in the notebook to interact with the Spotify API.
+
+### 2. Kaggle Account and API Credentials
+
+To upload datasets to Kaggle, you will need a Kaggle account and API token.
+
+1. Sign up for a Kaggle account at Kaggle.
+2. Obtain your API Token by clicking on your profile picture on the top right corner, and then navigate to 'My Account' from the dropdown menu. Scroll down to the 'API' section and click on 'Create New API Token'. This will download a kaggle.json file containing your API credentials.
+Store the kaggle.json file in the location `~/.kaggle/kaggle.json` on your machine. For more information, refer to the [Kaggle API documentation](https://www.kaggle.com/docs/api).
+3. Update the dataset-metadata.json file to direct the data at your dataset. You will not be able to use my same filepath because it is tied to my Kaggle credentials.
+
+### 3. Cloning the Repository
+Once you have set up your API credentials, clone this repository to your local machine to get started:
+
+```bash
+git clone https://github.com/your-github-username/your-repo-name.git
+```
+
+Now you can navigate into the cloned project directory and install the required Python packages.
+
+```bash
+cd your-repo-name
+pip install -r requirements.txt
+```
+With these steps, you're ready to explore the project!
+
+## Automation with GitHub Actions
+Under `.github/workflows` there is a `scheduled_update.yml` file. This file tells the repository to run generator.py file on the first of every month. Can be easily modified to run on push.
+
+## Licenses
+
+This project is not officially associated with Avenged Sevenfold, Spotify, or Kaggle and doesn't represent these companies or entities in any way. It serves as an open-source tool developed by the community to aid in the analysis of publically available data.
+
+### Spotify Data
+
+The data utilized in this project is fetched from the Spotify Web API. According to Spotify's [Developer Terms of Service](https://developer.spotify.com/terms/#iii-user-generated-applications), data fetched through the API can be used for non-commercial purposes.
+
+### Kaggle
+
+The project and its datasets are shared on Kaggle, an open platform for data science projects. All users are expected to respect the Kaggle [Terms of Service](https://www.kaggle.com/terms). 
+
+## Disclaimer
+
+The developer of this project is not responsible for misuse or violation of any terms of service caused by users of the project or the datasets generated by it.
+
+
+## Acknowledgements
+
+- **Spotify**: For providing the comprehensive and accessible Web API that makes projects like this possible.
+- **Kaggle**: For being an exceptional platform for data scientists around the world, fostering an environment of learning and collaboration.
+- **OpenAI**: For developing GPT-4, which aided in generating parts of this document that I don't have much experience with.
+- **Python open-source community**: For providing an extensive range of libraries that have made the data analysis and visualization so much more efficient.
+- **Spotipy**: For creating a simple way to work with the Spotify API in python.
+
+
+
+
